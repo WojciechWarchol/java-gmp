@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>advanced-multithreading</module>
+        <module>advanced-multithreading/task2-Sorting</module>
     </modules>
 
     <properties>
