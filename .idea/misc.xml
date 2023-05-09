@@ -5,6 +5,8 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/advanced-multithreading/task-5-producer-consumer-semaphore/pom.xml" />
+        <option value="$PROJECT_DIR$/advanced-multithreading/task5-producer-consumer-semaphore/pom.xml" />
       </list>
     </option>
   </component>

@@ -11,7 +11,9 @@
     <modules>
         <module>advanced-multithreading/task2-Sorting</module>
         <module>advanced-multithreading/task3-file-scanner</module>
-        <module>advanced-multithreading/task-4-open-salary</module>
+        <module>advanced-multithreading/task4-open-salary</module>
+        <module>advanced-multithreading/task5-producer-consumer-semaphore</module>
+        <module>advanced-multithreading/task5-producer-consumer-blocking-queue</module>
     </modules>
 
     <properties>
