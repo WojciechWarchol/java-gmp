@@ -14,6 +14,8 @@
         <module>advanced-multithreading/task4-open-salary</module>
         <module>advanced-multithreading/task5-producer-consumer-semaphore</module>
         <module>advanced-multithreading/task5-producer-consumer-blocking-queue</module>
+        <module>advanced-multithreading/task6-recursive-task</module>
+        <module>advanced-multithreading/task6-recursive-action</module>
     </modules>
 
     <properties>
