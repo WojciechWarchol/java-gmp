@@ -16,6 +16,7 @@
         <module>advanced-multithreading/task5-producer-consumer-blocking-queue</module>
         <module>advanced-multithreading/task6-recursive-task</module>
         <module>advanced-multithreading/task6-recursive-action</module>
+        <module>advanced-multithreading/task7-fork-blur</module>
     </modules>
 
     <properties>
