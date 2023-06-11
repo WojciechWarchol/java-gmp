@@ -7,6 +7,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/advanced-multithreading/task-5-producer-consumer-semaphore/pom.xml" />
         <option value="$PROJECT_DIR$/advanced-multithreading/task5-producer-consumer-semaphore/pom.xml" />
+        <option value="$PROJECT_DIR$/microservices/business-services/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
