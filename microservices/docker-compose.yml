@@ -1,4 +1,8 @@
+version: '3'
+
 services:
+
+# LOGGING
 
 #zipkin:
 #  image: openzipkin/zipkin
@@ -6,33 +10,50 @@ services:
 #    - "9411:9411"
 
   graphite:
+    container_name: "graphite-container"
     image: graphiteapp/graphite-statsd
     ports:
       - "2003:2003"
 
+# PLATFORM
+
   discovery:
+    container_name: "discovery-container"
     build: ./platform-services/discovery
     ports:
       - "8761:8761"
 
   apigateway:
+    container_name: "apigateway-container"
     build: ./platform-services/apigateway
     ports:
       - "8762:8762"
+    links:
+      - discovery
 
+# BUSINESS
   common:
+    container_name: "common-container"
     build: ./business-services/common
+    ports:
+      - "8081:8081"
     links:
       - discovery
 
   one:
+    container_name: "one-container"
     build: ./business-services/one
+    ports:
+      - "8082:8082"
     links:
       - graphite
       - discovery
 
   two:
+    container_name: "two-container"
     build: ./business-services/two
+    ports:
+      - "8083:8083"
     links:
       - graphite
       - discovery
