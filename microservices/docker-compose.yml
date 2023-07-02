@@ -14,7 +14,11 @@ services:
     container_name: "graphite"
     image: graphiteapp/graphite-statsd
     ports:
+      - "8100:80"
       - "2003:2003"
+      - "2004:2004"
+      - "8125:8125/udp"
+      - "8126:8126"
 
 # PLATFORM
 
@@ -45,6 +49,11 @@ services:
     depends_on:
       - apigateway
       - discovery
+    healthcheck:
+      test: curl --fail http://apigateway:8762/api/prop/property-hello || exit 1
+      interval: 5s
+      timeout: 2s
+      retries: 10
 
   one:
     container_name: "one"
@@ -57,10 +66,8 @@ services:
       - apigateway
       - common
     depends_on:
-      - graphite
-      - discovery
-      - common
-      - apigateway
+      common:
+        condition: service_healthy
 
   two:
     container_name: "two"
@@ -73,14 +80,5 @@ services:
       - apigateway
       - common
     depends_on:
-#      - graphite
-#      - discovery
       common:
-        condition: service_started
-      apigateway:
-        condition: service_started
-    healthcheck:
-      test: curl --fail http://apigateway:8762/api/prop/property-hello || exit 1
-      interval: 5s
-      timeout: 2s
-      retries: 10
+        condition: service_healthy

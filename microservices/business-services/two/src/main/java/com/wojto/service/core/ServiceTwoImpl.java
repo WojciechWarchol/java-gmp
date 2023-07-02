@@ -22,12 +22,6 @@ public class ServiceTwoImpl implements ServiceTwo {
     public void init() {
         RestTemplate restTemplate = new RestTemplate();
 
-        SimpleRetryPolicy retryPolicy = new SimpleRetryPolicy();
-        retryPolicy.setMaxAttempts(maxAttempt);
-
-        FixedBackOffPolicy backOffPolicy = new FixedBackOffPolicy();
-        backOffPolicy.setBackOffPeriod(retryTimeInterval); // 1.5 seconds
-
         String propertiesUri = ZUUL_URL + API_PATH + PROPERTIES_PATH;
         String helloMessageUri = propertiesUri + HELLO_MESSAGE_PARAM_PATH;
         String twoMessageUri = propertiesUri + TWO_MESSAGE_PARAM_PATH;

@@ -16,4 +16,6 @@ COPY target/${JAR_NAME_TO_RUN} .
 
 EXPOSE ${PORT_TO_EXPOSE}
 
+RUN apt-get update && apt-get install -y curl
+
 ENTRYPOINT ["java", "-jar", "common.jar"]
