@@ -19,7 +19,7 @@ import static java.util.concurrent.TimeUnit.*;
 @Service
 public class ServiceOneImpl implements ServiceOne {
 
-    private static final String ZUUL_URL = "http://localhost:8762/";
+    private static final String ZUUL_URL = "http://apigateway:8762/";
     private static final String API_PATH = "/api";
     private static final String PROPERTIES_PATH = "/prop";
     private static final String HELLO_MESSAGE_PARAM_PATH = "/property-hello";
@@ -43,7 +43,7 @@ public class ServiceOneImpl implements ServiceOne {
         monitorRegistry.register(peekRateCounter);
         monitorRegistry.register(basicTimer);
 
-        MetricObserver graphiteObserver = new GraphiteMetricObserver("servo", "localhost:2003");
+        MetricObserver graphiteObserver = new GraphiteMetricObserver("servo", "graphite:2003");
         PollRunnable pollRunnable = new PollRunnable(
                 new MonitorRegistryMetricPoller(monitorRegistry), new BasicMetricFilter(true), graphiteObserver);
         PollScheduler.getInstance().start();

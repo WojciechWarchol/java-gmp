@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
 @Service
 public class ServiceTwoImpl implements ServiceTwo {
 
-    private static final String ZUUL_URL = "http://localhost:8762/";
+    private static final String ZUUL_URL = "http://apigateway:8762/";
     private static final String API_PATH = "/api";
     private static final String PROPERTIES_PATH = "/prop";
     private static final String HELLO_MESSAGE_PARAM_PATH = "/property-hello";
@@ -21,6 +21,12 @@ public class ServiceTwoImpl implements ServiceTwo {
     @PostConstruct
     public void init() {
         RestTemplate restTemplate = new RestTemplate();
+
+        SimpleRetryPolicy retryPolicy = new SimpleRetryPolicy();
+        retryPolicy.setMaxAttempts(maxAttempt);
+
+        FixedBackOffPolicy backOffPolicy = new FixedBackOffPolicy();
+        backOffPolicy.setBackOffPeriod(retryTimeInterval); // 1.5 seconds
 
         String propertiesUri = ZUUL_URL + API_PATH + PROPERTIES_PATH;
         String helloMessageUri = propertiesUri + HELLO_MESSAGE_PARAM_PATH;
