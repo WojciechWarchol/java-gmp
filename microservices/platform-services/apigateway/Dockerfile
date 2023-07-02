@@ -1,16 +1,19 @@
 FROM openjdk:11-jre-slim
 
-#VOLUME /tmp
+ENV MODULE_NAME="apigateway"
+ENV VERSION="1.0"
+ENV LABEL_DESCRIPTION="Docker image for Zull '${MODULE_NAME}' microservice"
+ENV JAR_NAME_TO_RUN="apigateway.jar"
+ENV PORT_TO_EXPOSE="8762"
+ENV VOLUME_PATH="/tmp"
 
-WORKDIR /app
+VOLUME ${VOLUME_PATH}
 
-LABEL version="1.0"
-LABEL description="Zuul API gateway server"
+LABEL version=${VERSION}
+LABEL description=${DESCRIPTION}
 
-COPY target/apigateway.jar .
+COPY target/${JAR_NAME_TO_RUN} .
 
-EXPOSE 8762
+EXPOSE ${PORT_TO_EXPOSE}
 
-CMD ["java", "-jar", "apigateway.jar"]
-
-
+ENTRYPOINT ["java", "-jar", "apigateway.jar"]

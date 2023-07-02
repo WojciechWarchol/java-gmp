@@ -1,14 +1,19 @@
 FROM openjdk:11-jre-slim
 
-VOLUME /tmp
+ENV MODULE_NAME="common"
+ENV VERSION="1.0"
+ENV LABEL_DESCRIPTION="Docker image for '${MODULE_NAME}' microservice"
+ENV JAR_NAME_TO_RUN="common.jar"
+ENV PORT_TO_EXPOSE="8081"
+ENV VOLUME_PATH="/tmp"
 
-LABEL version="1.0"
-LABEL description="Archaius server with configuration for services."
+VOLUME ${VOLUME_PATH}
 
-COPY target/common.jar .
+LABEL version=${VERSION}
+LABEL description=${DESCRIPTION}
 
-#EXPOSE 8080
+COPY target/${JAR_NAME_TO_RUN} .
 
-CMD ["java", "-jar", "common.jar"]
+EXPOSE ${PORT_TO_EXPOSE}
 
-
+ENTRYPOINT ["java", "-jar", "common.jar"]

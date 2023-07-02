@@ -1,16 +1,19 @@
 FROM openjdk:11-jre-slim
 
-#VOLUME /tmp
+ENV MODULE_NAME="ONE"
+ENV VERSION="1.0"
+ENV LABEL_DESCRIPTION="Docker image for simple '${MODULE_NAME}' microservice"
+ENV JAR_NAME_TO_RUN="one.jar"
+ENV PORT_TO_EXPOSE="8082"
+ENV VOLUME_PATH="/tmp"
 
-WORKDIR /app
+VOLUME ${VOLUME_PATH}
 
-LABEL version="1.0"
-LABEL description="Simple service application ONE."
+LABEL version=${VERSION}
+LABEL description=${DESCRIPTION}
 
-COPY target/one.jar .
+COPY target/${JAR_NAME_TO_RUN} .
 
-#EXPOSE 8080
+EXPOSE ${PORT_TO_EXPOSE}
 
-CMD ["java", "-jar", "one.jar"]
-
-
+ENTRYPOINT ["java", "-jar", "one.jar"]
