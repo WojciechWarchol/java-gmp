@@ -12,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
 import static java.util.concurrent.TimeUnit.*;
@@ -34,7 +36,7 @@ public class ServiceOneImpl implements ServiceOne {
     @PostConstruct
     public void init() {
         RestTemplate restTemplate = new RestTemplate();
-        basicCounter = new BasicCounter(MonitorConfig.builder("basicCounter").build());
+/*        basicCounter = new BasicCounter(MonitorConfig.builder("basicCounter").build());
         peekRateCounter = new PeakRateCounter(MonitorConfig.builder("peekRateCounter").build());
         basicTimer = new BasicTimer(MonitorConfig.builder("basicTimer").build(), MILLISECONDS);
 
@@ -44,14 +46,24 @@ public class ServiceOneImpl implements ServiceOne {
         monitorRegistry.register(basicTimer);
 
         MetricObserver graphiteObserver = new GraphiteMetricObserver("servo", "graphite:2003");
+        MonitorConfig.Builder configBuilder = null;
+        try {
+            configBuilder = MonitorConfig.builder("servo")
+                    .withTag("host", InetAddress.getLocalHost().getHostName());
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+//        graphiteObserver.configure(configBuilder.build());
+//        graphiteObserver.start();
+
         PollRunnable pollRunnable = new PollRunnable(
                 new MonitorRegistryMetricPoller(monitorRegistry), new BasicMetricFilter(true), graphiteObserver);
+//        MetricObserverMetricPoller poller = new MetricObserverMetricPoller(graphiteObserver);
+//        PollRunnable pollRunnable = new PollRunnable(poller, new BasicMetricFilter(true));
         PollScheduler.getInstance().start();
-        PollScheduler.getInstance().addPoller(pollRunnable, 1, SECONDS);
+        PollScheduler.getInstance().addPoller(pollRunnable, 1, SECONDS);*/
 
-/*        Zipki
-
-        // Create a ZipkinReporter
+/*        // Create a ZipkinReporter
         ZipkinConfig zipkinConfig = ZipkinConfig.builder()
                 .setEndpoint(System.getProperty("servo.zipkin.endpoint"))
                 .build();
@@ -59,10 +71,10 @@ public class ServiceOneImpl implements ServiceOne {
         ZipkinReporter reporter = new ZipkinReporter(registry);
 
         // Register the Counter with ZipkinReporter
-        registry.register(counter);*/
+        registry.register(counter);
 
         // Start the ZipkinReporter
-//        reporter.start();
+        reporter.start();*/
 
         Stopwatch stopwatch = basicTimer.start();
         String propertiesUri = ZUUL_URL + API_PATH + PROPERTIES_PATH;
