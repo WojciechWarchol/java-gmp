@@ -1,6 +1,5 @@
 package com.wojto.service.core;
 
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

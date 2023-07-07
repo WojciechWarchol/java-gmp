@@ -5,18 +5,15 @@ import com.netflix.servo.MonitorRegistry;
 import com.netflix.servo.monitor.*;
 import com.netflix.servo.publish.*;
 import com.netflix.servo.publish.graphite.GraphiteMetricObserver;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.concurrent.TimeUnit;
 
-import static java.util.concurrent.TimeUnit.*;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 @Service
 public class ServiceOneImpl implements ServiceOne {
@@ -36,7 +33,7 @@ public class ServiceOneImpl implements ServiceOne {
     @PostConstruct
     public void init() {
         RestTemplate restTemplate = new RestTemplate();
-/*        basicCounter = new BasicCounter(MonitorConfig.builder("basicCounter").build());
+        basicCounter = new BasicCounter(MonitorConfig.builder("basicCounter").build());
         peekRateCounter = new PeakRateCounter(MonitorConfig.builder("peekRateCounter").build());
         basicTimer = new BasicTimer(MonitorConfig.builder("basicTimer").build(), MILLISECONDS);
 
@@ -47,21 +44,14 @@ public class ServiceOneImpl implements ServiceOne {
 
         MetricObserver graphiteObserver = new GraphiteMetricObserver("servo", "graphite:2003");
         MonitorConfig.Builder configBuilder = null;
-        try {
-            configBuilder = MonitorConfig.builder("servo")
-                    .withTag("host", InetAddress.getLocalHost().getHostName());
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
+
 //        graphiteObserver.configure(configBuilder.build());
 //        graphiteObserver.start();
 
         PollRunnable pollRunnable = new PollRunnable(
                 new MonitorRegistryMetricPoller(monitorRegistry), new BasicMetricFilter(true), graphiteObserver);
-//        MetricObserverMetricPoller poller = new MetricObserverMetricPoller(graphiteObserver);
-//        PollRunnable pollRunnable = new PollRunnable(poller, new BasicMetricFilter(true));
         PollScheduler.getInstance().start();
-        PollScheduler.getInstance().addPoller(pollRunnable, 1, SECONDS);*/
+        PollScheduler.getInstance().addPoller(pollRunnable, 1, SECONDS);
 
 /*        // Create a ZipkinReporter
         ZipkinConfig zipkinConfig = ZipkinConfig.builder()

@@ -53,7 +53,7 @@ services:
       test: curl --fail http://apigateway:8762/api/prop/property-hello || exit 1
       interval: 5s
       timeout: 2s
-      retries: 10
+      retries: 20
 
   one:
     container_name: "one"
