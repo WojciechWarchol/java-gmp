@@ -1,0 +1,84 @@
+version: '3'
+
+services:
+
+# LOGGING
+
+  zipkin:
+    container_name: "zipkin"
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+
+  graphite:
+    container_name: "graphite"
+    image: graphiteapp/graphite-statsd
+    ports:
+      - "8100:80"
+      - "2003:2003"
+      - "2004:2004"
+      - "8125:8125/udp"
+      - "8126:8126"
+
+# PLATFORM
+
+  discovery:
+    container_name: "discovery"
+    build: ./platform-services/discovery
+    ports:
+      - "8761:8761"
+
+  apigateway:
+    container_name: "apigateway"
+    build: ./platform-services/apigateway
+    ports:
+      - "8762:8762"
+    links:
+      - discovery
+    depends_on:
+      - discovery
+
+  # BUSINESS
+  common:
+    container_name: "common"
+    build: ./business-services/common
+    ports:
+      - "8081:8081"
+    links:
+      - discovery
+    depends_on:
+      - apigateway
+      - discovery
+    healthcheck:
+      test: curl --fail http://apigateway:8762/api/prop/property-hello || exit 1
+      interval: 5s
+      timeout: 2s
+      retries: 20
+
+  one:
+    container_name: "one"
+    build: ./business-services/one
+    ports:
+      - "8082:8082"
+    links:
+      - graphite
+      - discovery
+      - apigateway
+      - common
+    depends_on:
+      common:
+        condition: service_healthy
+
+  two:
+    container_name: "two"
+    build: ./business-services/two
+    ports:
+      - "8083:8083"
+    links:
+      - graphite
+      - discovery
+      - apigateway
+      - common
+    depends_on:
+      common:
+        condition: service_healthy
