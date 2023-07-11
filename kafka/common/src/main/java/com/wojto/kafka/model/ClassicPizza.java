@@ -9,7 +9,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Getter @Setter
-public class ClassicPizza implements Pizza{
+public class ClassicPizza implements com.wojto.kafka.model.Pizza {
 
     private int number;
     private List<Ingredient> ingredients;

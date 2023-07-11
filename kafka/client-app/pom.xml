@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.wojto</groupId>
+        <groupId>com.wojto.kafka</groupId>
         <artifactId>kafka</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -23,12 +23,12 @@
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.wojto.kafka</groupId>-->
-<!--            <artifactId>common</artifactId>-->
-<!--            <version>${parent.version}</version>-->
-<!--&lt;!&ndash;            <scope>compile</scope>&ndash;&gt;-->
-<!--        </dependency>-->
+<!--        <dependency>
+            <groupId>com.wojto.kafka</groupId>
+            <artifactId>common</artifactId>
+            <version>${parent.version}</version>
+&lt;!&ndash;            <scope>compile</scope>&ndash;&gt;
+        </dependency>-->
     </dependencies>
 
 </project>
