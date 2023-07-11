@@ -11,7 +11,7 @@ import java.util.List;
 @Getter @Setter
 public class NormalOrder implements Order {
 
-    private long orderNumber;
+    private long orderId;
     private long userId;
     private List<Pizza> orderContents;
     private OrderStatus orderStatus;

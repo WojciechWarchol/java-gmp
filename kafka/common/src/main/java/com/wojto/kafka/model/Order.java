@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface Order {
 
-    public long getOrderNumber();
+    public long getOrderId();
     public long getUserId();
     public List<Pizza> getOrderContents();
     public OrderStatus getOrderStatus();
