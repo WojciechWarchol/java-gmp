@@ -38,4 +38,5 @@ public enum Ingredient {
     private enum IngredientType {
         SAUCE, CHEESE, MEAT, VEGGIE, FRUIT, OTHER
     }
+
 }

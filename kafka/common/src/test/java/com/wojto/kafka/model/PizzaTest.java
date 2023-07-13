@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ClassicPizzaTest {
+class PizzaTest {
 
     @Test
     void getPrice() {
@@ -16,7 +16,7 @@ class ClassicPizzaTest {
                 Ingredient.MOZZARELLA,
                 Ingredient.SALAMI
         );
-        Pizza testPizza = new ClassicPizza(1, ingredientList, PizzaSize.M);
+        Pizza testPizza = new Pizza(1, ingredientList, PizzaSize.M);
 
         assertEquals(BigDecimal.valueOf(34), testPizza.getPrice());
     }

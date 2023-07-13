@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class NormalOrderTest {
+class OrderTest {
 
     @Test
     void getOrderTotal() {
@@ -22,11 +22,11 @@ class NormalOrderTest {
                 Ingredient.BACON,
                 Ingredient.ONIONS
         );
-        Pizza testPizza1 = new ClassicPizza(1, ingredientList1, PizzaSize.M);
-        Pizza testPizza2 = new ClassicPizza(2, ingredientList2, PizzaSize.L);
+        Pizza testPizza1 = new Pizza(1, ingredientList1, PizzaSize.M);
+        Pizza testPizza2 = new Pizza(2, ingredientList2, PizzaSize.L);
         List<Pizza> orderContents = List.of(testPizza1, testPizza2);
 
-        NormalOrder testOrder = new NormalOrder(1, orderContents, new Address());
+        Order testOrder = new Order(1, orderContents, new Address());
 
         assertEquals(BigDecimal.valueOf(82), testOrder.getOrderTotal());
     }
