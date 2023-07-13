@@ -27,6 +27,11 @@ public class PalmettoApplication {
 	@Autowired
 	private KafkaProperties kafkaProperties;
 
+	@Bean
+	public KafkaTemplate<String, Object> kafkaTemplate() {
+		return new KafkaTemplate<>(producerFactory());
+	}
+
 	/* Producer */
 	@Bean
 	public Map<String, Object> producerConfigs() {
@@ -42,11 +47,6 @@ public class PalmettoApplication {
 	@Bean
 	public ProducerFactory<String, Object> producerFactory() {
 		return new DefaultKafkaProducerFactory<>(producerConfigs());
-	}
-
-	@Bean
-	public KafkaTemplate<String, Object> kafkaTemplate() {
-		return new KafkaTemplate<>(producerFactory());
 	}
 
 

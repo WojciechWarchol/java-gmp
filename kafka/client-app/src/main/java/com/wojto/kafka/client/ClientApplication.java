@@ -35,6 +35,11 @@ public class ClientApplication {
     @Value("${tpd.topic-name}")
     private String topicName;
 
+    @Bean
+    public KafkaTemplate<String, Object> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
+    }
+
     /* Topic creation */
     @Bean
     public NewTopic adviceTopic() {
@@ -56,11 +61,6 @@ public class ClientApplication {
     @Bean
     public ProducerFactory<String, Object> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
-    }
-
-    @Bean
-    public KafkaTemplate<String, Object> kafkaTemplate() {
-        return new KafkaTemplate<>(producerFactory());
     }
 
 	/* Consumer */

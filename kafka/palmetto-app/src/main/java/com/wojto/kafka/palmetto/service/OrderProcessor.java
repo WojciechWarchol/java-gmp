@@ -10,6 +10,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 
 import javax.annotation.PreDestroy;
@@ -18,9 +19,10 @@ import java.util.List;
 import java.util.concurrent.*;
 
 @Slf4j
+@Service
 public class OrderProcessor {
 
-    private final int THREADS_NUMBER = Runtime.getRuntime().availableProcessors();
+    private final int THREADS_NUMBER = Runtime.getRuntime().availableProcessors() / 2;
     private final ExecutorService executor = Executors.newFixedThreadPool(THREADS_NUMBER);
 
     private final KafkaTemplate<String, OrderStatus> template;
