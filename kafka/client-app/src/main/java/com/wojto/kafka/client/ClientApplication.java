@@ -1,5 +1,7 @@
 package com.wojto.kafka.client;
 
+import com.wojto.kafka.model.Notification;
+import com.wojto.kafka.model.Order;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -9,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.*;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
@@ -20,6 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SpringBootApplication
+@EnableJpaRepositories("com.wojto.kafka.client.repository")
+@EntityScan("com.wojto.kafka.model")
 public class ClientApplication {
 
     private static final int NUMBER_OF_PARTITIONS = 3;
@@ -32,18 +38,25 @@ public class ClientApplication {
     @Autowired
     private KafkaProperties kafkaProperties;
 
-    @Value("${tpd.topic-name}")
-    private String topicName;
+    @Value("${tpd.order-topic-name}")
+    private String orderTopicName;
+    @Value("${tpd.notification-topic-name}")
+    private String notificationTopicName;
 
     @Bean
-    public KafkaTemplate<String, Object> kafkaTemplate() {
+    public KafkaTemplate<String, Order> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 
     /* Topic creation */
     @Bean
-    public NewTopic adviceTopic() {
-        return new NewTopic(topicName, NUMBER_OF_PARTITIONS, REPLICATION_FACTOR);
+    public NewTopic orderTopic() {
+        return new NewTopic(orderTopicName, NUMBER_OF_PARTITIONS, REPLICATION_FACTOR);
+    }
+
+    @Bean
+    public NewTopic notificationTopic() {
+        return new NewTopic(notificationTopicName, NUMBER_OF_PARTITIONS, REPLICATION_FACTOR);
     }
 
     /* Producer */
@@ -59,7 +72,7 @@ public class ClientApplication {
     }
 
     @Bean
-    public ProducerFactory<String, Object> producerFactory() {
+    public ProducerFactory<String, Order> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
@@ -80,8 +93,8 @@ public class ClientApplication {
     }
 
     @Bean
-    public ConsumerFactory<String, Object> consumerFactory() {
-        final JsonDeserializer<Object> jsonDeserializer = new JsonDeserializer<>();
+    public ConsumerFactory<String, Notification> consumerFactory() {
+        final JsonDeserializer<Notification> jsonDeserializer = new JsonDeserializer<>(Notification.class);
         jsonDeserializer.addTrustedPackages("*");
         return new DefaultKafkaConsumerFactory<>(
                 kafkaProperties.buildConsumerProperties(), new StringDeserializer(), jsonDeserializer
@@ -89,8 +102,8 @@ public class ClientApplication {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, Object> factory =
+    public ConcurrentKafkaListenerContainerFactory<String, Notification> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Notification> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
 

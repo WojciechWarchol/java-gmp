@@ -2,6 +2,7 @@ package com.wojto.kafka.client.service;
 
 import com.wojto.kafka.client.repository.OrderRepository;
 import com.wojto.kafka.model.Order;
+import com.wojto.kafka.model.OrderStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,31 +20,28 @@ import java.util.Optional;
 @Slf4j
 public class OrderService {
 
-    private final KafkaTemplate<String, Order> template;
+    private final KafkaTemplate<String, Order> kafkaTemplate;
     private final String topicName;
-    private final int messagesPerRequest;
-//    private CountDownLatch latch;
 
     private final OrderRepository orderRepository;
 
     @Autowired
     public OrderService(
-            final KafkaTemplate<String, Order> template,
-            @Value("${tpd.topic-name}") final String topicName,
-            @Value("${tpd.messages-per-request}") final int messagesPerRequest,
+            final KafkaTemplate<String, Order> kafkaTemplate,
+            @Value("${tpd.order-topic-name}") final String topicName,
             final OrderRepository orderRepository) {
-        this.template = template;
+        this.kafkaTemplate = kafkaTemplate;
         this.topicName = topicName;
-        this.messagesPerRequest = messagesPerRequest;
         this.orderRepository = orderRepository;
     }
 
     public Order processOrder(Order order) {
+        order.setOrderStatus(OrderStatus.IN_PREPARATION);
         Order newOrder = orderRepository.save(order);
         if (newOrder == null) {
             new RuntimeException("Failed to save the Order to the database.");
         }
-        ListenableFuture<SendResult<String, Order>> future = template.send(topicName, newOrder);
+        ListenableFuture<SendResult<String, Order>> future = kafkaTemplate.send(topicName, newOrder);
 
         future.addCallback(
                 result -> {

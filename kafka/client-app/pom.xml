@@ -23,12 +23,6 @@
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
-<!--        <dependency>
-            <groupId>com.wojto.kafka</groupId>
-            <artifactId>common</artifactId>
-            <version>${parent.version}</version>
-&lt;!&ndash;            <scope>compile</scope>&ndash;&gt;
-        </dependency>-->
     </dependencies>
 
 </project>

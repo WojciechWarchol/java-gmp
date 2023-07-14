@@ -1,0 +1,73 @@
+version: '3'
+
+services:
+
+  # INFRASTRUCTURE
+
+  zookeeper:
+    container_name: "zookeeper"
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    container_name: "kafka"
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    links:
+      - zookeeper
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+
+  mysql:
+    container_name: "mysql"
+    image: mysql
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: kafkaRootPass
+      MYSQL_DATABASE: palmetto
+      MYSQL_USER: kafkaUser
+      MYSQL_PASSWORD: kafkaPass
+
+  # APPLICATION
+
+  client:
+    container_name: "client"
+    build: ./client-app
+    ports:
+      - "8081:8081"
+    links:
+      - mysql
+      - kafka
+    depends_on:
+      - mysql
+      - kafka
+
+  palmetto:
+    container_name: "palmetto"
+    build: ./palmetto-app
+    ports:
+      - "8082:8082"
+    links:
+      - kafka
+    depends_on:
+      - kafka
+
+  courier:
+    container_name: "courier"
+    build: ./courier-app
+    ports:
+      - "8083:8083"
+    links:
+      - kafka
+    depends_on:
+      - kafka

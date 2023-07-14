@@ -93,7 +93,7 @@
 				</executions>
 			</plugin>
 		</plugins>
-<!--		<finalName>${project.artifactId}</finalName>-->
+		<finalName>${project.artifactId}</finalName>
 	</build>
 
 </project>

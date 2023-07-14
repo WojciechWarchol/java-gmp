@@ -2,20 +2,31 @@ package com.wojto.kafka.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
+@Entity
 public class Order {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderId;
+    @Column
     private long userId;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<Pizza> orderContents;
+    @Column
+    @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
+    @Embedded
     private Address deliveryAddress;
 
     public Order(long userId, List<Pizza> orderContents, Address deliveryAddress) {

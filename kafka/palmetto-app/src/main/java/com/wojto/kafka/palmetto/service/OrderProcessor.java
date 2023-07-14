@@ -25,12 +25,12 @@ public class OrderProcessor {
     private final int THREADS_NUMBER = Runtime.getRuntime().availableProcessors() / 2;
     private final ExecutorService executor = Executors.newFixedThreadPool(THREADS_NUMBER);
 
-    private final KafkaTemplate<String, OrderStatus> template;
+    private final KafkaTemplate<String, OrderStatus> kafkaTemplate;
     private final String topicName;
 
-    public OrderProcessor(final KafkaTemplate<String, OrderStatus> template,
-                          @Value("${tpd.topic-name}") final String topicName) {
-        this.template = template;
+    public OrderProcessor(final KafkaTemplate<String, OrderStatus> kafkaTemplate,
+                          @Value("${tpd.notification-topic-name}") final String topicName) {
+        this.kafkaTemplate = kafkaTemplate;
         this.topicName = topicName;
     }
 
@@ -63,7 +63,7 @@ public class OrderProcessor {
                     int sleepTime = 5000 + (int) (Math.random() * 10000);
                     Thread.sleep(sleepTime);
 
-                    log.info("cooked pizza number: " + pizza.getNumber());
+                    log.info("cooked pizza number: " + pizza.getId());
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -86,7 +86,7 @@ public class OrderProcessor {
     }
 
     private void broadcastOrderStatusToKafka(OrderStatus orderStatus) {
-        ListenableFuture<SendResult<String, OrderStatus>> future = template.send(topicName, orderStatus);
+        ListenableFuture<SendResult<String, OrderStatus>> future = kafkaTemplate.send(topicName, orderStatus);
 
         future.addCallback(
                 result -> {

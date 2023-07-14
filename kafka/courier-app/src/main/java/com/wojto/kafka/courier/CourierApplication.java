@@ -1,5 +1,6 @@
 package com.wojto.kafka.courier;
 
+import com.wojto.kafka.model.Notification;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -28,7 +29,7 @@ public class CourierApplication {
 	private KafkaProperties kafkaProperties;
 
 	@Bean
-	public KafkaTemplate<String, Object> kafkaTemplate() {
+	public KafkaTemplate<String, Notification> kafkaTemplate() {
 		return new KafkaTemplate<>(producerFactory());
 	}
 
@@ -45,7 +46,7 @@ public class CourierApplication {
 	}
 
 	@Bean
-	public ProducerFactory<String, Object> producerFactory() {
+	public ProducerFactory<String, Notification> producerFactory() {
 		return new DefaultKafkaProducerFactory<>(producerConfigs());
 	}
 
@@ -67,8 +68,8 @@ public class CourierApplication {
 	}
 
 	@Bean
-	public ConsumerFactory<String, Object> consumerFactory() {
-		final JsonDeserializer<Object> jsonDeserializer = new JsonDeserializer<>();
+	public ConsumerFactory<String, Notification> consumerFactory() {
+		final JsonDeserializer<Notification> jsonDeserializer = new JsonDeserializer<>(Notification.class);
 		jsonDeserializer.addTrustedPackages("*");
 		return new DefaultKafkaConsumerFactory<>(
 				kafkaProperties.buildConsumerProperties(), new StringDeserializer(), jsonDeserializer
@@ -76,8 +77,8 @@ public class CourierApplication {
 	}
 
 	@Bean
-	public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
-		ConcurrentKafkaListenerContainerFactory<String, Object> factory =
+	public ConcurrentKafkaListenerContainerFactory<String, Notification> kafkaListenerContainerFactory() {
+		ConcurrentKafkaListenerContainerFactory<String, Notification> factory =
 				new ConcurrentKafkaListenerContainerFactory<>();
 		factory.setConsumerFactory(consumerFactory());
 
