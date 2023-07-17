@@ -14,7 +14,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL57InnoDBDialect
   datasource:
-#    url: "jdbc:mysql://localhost:3306/palmetto"
     url: "jdbc:mysql://mysql:3306/palmetto"
     username: kafkaUser
     password: kafkaPass
@@ -23,6 +22,8 @@ spring:
 #    init:
 #      mode: always
 
+server:
+  port: 8081
 
 tpd:
   order-topic-name: order

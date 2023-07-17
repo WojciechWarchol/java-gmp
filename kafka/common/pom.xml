@@ -94,6 +94,26 @@
                     <target>11</target>
                 </configuration>
             </plugin>
+<!--            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+&lt;!&ndash;                            <transformers>&ndash;&gt;
+&lt;!&ndash;                                <transformer implementation=&ndash;&gt;
+&lt;!&ndash;                                                     "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">&ndash;&gt;
+&lt;!&ndash;                                    <mainClass>com.wojto.kafka.model.Main</mainClass>&ndash;&gt;
+&lt;!&ndash;                                </transformer>&ndash;&gt;
+&lt;!&ndash;                            </transformers>&ndash;&gt;
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
         </plugins>
     </build>
 

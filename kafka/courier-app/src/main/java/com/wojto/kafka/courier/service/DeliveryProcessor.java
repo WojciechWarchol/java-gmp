@@ -4,6 +4,7 @@ import com.wojto.kafka.model.Notification;
 import com.wojto.kafka.model.OrderStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -22,10 +23,11 @@ public class DeliveryProcessor {
     private final int THREADS_NUMBER = Runtime.getRuntime().availableProcessors() / 2;
     private final ExecutorService executor = Executors.newFixedThreadPool(THREADS_NUMBER);
 
-    private final KafkaTemplate<String, OrderStatus> kafkaTemplate;
+    private final KafkaTemplate<String, Notification> kafkaTemplate;
     private final String topicName;
 
-    public DeliveryProcessor(final KafkaTemplate<String, OrderStatus> kafkaTemplate,
+    @Autowired
+    public DeliveryProcessor(final KafkaTemplate<String, Notification> kafkaTemplate,
                              @Value("${tpd.notification-topic-name}") final String topicName) {
         this.kafkaTemplate = kafkaTemplate;
         this.topicName = topicName;
@@ -38,13 +40,14 @@ public class DeliveryProcessor {
 
     @KafkaListener(topics = "notification", clientIdPrefix = "json",
             containerFactory = "kafkaListenerContainerFactory")
-    public void listenForOrderUpdates(ConsumerRecord<String, OrderStatus> cr,
-                                      @Payload Notification payload) {
+    public void listenForOrderUpdates(ConsumerRecord<String, Notification> cr, @Payload Notification payload) {
+        if (payload.getOrderStatus() != OrderStatus.IN_DELIVERY) return;
+
         log.info("Courier app received Order with ID: " + payload.getOrderId() + ". Delivering Pizzas");
         log.debug("Received Order: " + payload.toString());
 
-        OrderStatus orderStatus = deliverOrder(payload);
-        broadcastOrderStatusToKafka(orderStatus);
+        payload.setOrderStatus(deliverOrder(payload));
+        broadcastOrderStatusToKafka(payload);
     }
 
     public OrderStatus deliverOrder(Notification notification) {
@@ -75,8 +78,8 @@ public class DeliveryProcessor {
         return OrderStatus.DELIVERED;
     }
 
-    private void broadcastOrderStatusToKafka(OrderStatus orderStatus) {
-        ListenableFuture<SendResult<String, OrderStatus>> future = kafkaTemplate.send(topicName, orderStatus);
+    private void broadcastOrderStatusToKafka(Notification orderStatus) {
+        ListenableFuture<SendResult<String, Notification>> future = kafkaTemplate.send(topicName, orderStatus);
 
         future.addCallback(
                 result -> {

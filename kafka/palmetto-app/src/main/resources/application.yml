@@ -4,6 +4,11 @@ spring:
       group-id: notification-id
       auto-offset-reset: earliest
     bootstrap-servers: kafka:9092
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+    server:
+      port: 8083
 
 tpd:
   notification-topic-name: notification

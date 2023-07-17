@@ -1,6 +1,7 @@
 package com.wojto.kafka.client.service;
 
 import com.wojto.kafka.client.repository.OrderRepository;
+import com.wojto.kafka.model.Notification;
 import com.wojto.kafka.model.Order;
 import com.wojto.kafka.model.OrderStatus;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +38,7 @@ public class OrderService {
 
     public Order processOrder(Order order) {
         order.setOrderStatus(OrderStatus.IN_PREPARATION);
+//        order.getOrderContents().forEach(p -> p.setOrder(order));
         Order newOrder = orderRepository.save(order);
         if (newOrder == null) {
             new RuntimeException("Failed to save the Order to the database.");
@@ -59,14 +61,16 @@ public class OrderService {
 
     @KafkaListener(topics = "notification", clientIdPrefix = "json",
             containerFactory = "kafkaListenerContainerFactory")
-    public void listenForOrderUpdates(ConsumerRecord<String, Order> cr,
-                                      @Payload Order payload) {
-        log.info("Client app received Order with ID: " + payload.getOrderId() + ". Saving it to DB.");
-        log.debug("Received Order: " + payload.toString());
-        orderRepository.save(payload);
-//        logger.info("Logger 1 [JSON] received key {}: Type [{}] | Payload: {} | Record: {}", cr.key(),
-//                typeIdHeader(cr.headers()), payload, cr.toString());
-//        latch.countDown();
+    public void listenForOrderUpdates(ConsumerRecord<String, Order> cr, @Payload Notification payload) {
+        log.info("Client app received status Notification of Order with ID: " + payload.getOrderId());
+        log.debug("Received Notification: " + payload.toString());
+
+        Order updateOrder = orderRepository.findByOrderId(payload.getOrderId())
+                .orElseThrow(() -> new RuntimeException("Didn't find Order to update status!"));
+        log.info("Client app found Order with ID: " + payload.getOrderId() + ". Saving updated status to DB.");
+        updateOrder.setOrderStatus(payload.getOrderStatus());
+
+        orderRepository.save(updateOrder);
     }
 
     public Order getOrder(long orderId) {

@@ -16,7 +16,8 @@ class PizzaTest {
                 Ingredient.MOZZARELLA,
                 Ingredient.SALAMI
         );
-        Pizza testPizza = new Pizza(1,new Order(), ingredientList, PizzaSize.M);
+//        Pizza testPizza = new Pizza(1,new Order(), ingredientList, PizzaSize.M);
+        Pizza testPizza = new Pizza(1, ingredientList, PizzaSize.M);
 
         assertEquals(BigDecimal.valueOf(34), testPizza.getPrice());
     }
