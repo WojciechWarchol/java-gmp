@@ -1,0 +1,28 @@
+zuul:
+  prefix: /api
+  routes:
+    service-one:
+      path: /one/**
+      serviceId: service-one
+    service-two:
+      path: /two/**
+      serviceId: service-two
+    archaius-server:
+      path: /prop/**
+      serviceId: archaius-server
+
+spring:
+  application:
+    name: spring-cloud-apigateway
+
+server:
+  port: 8762
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
+  instance:
+    preferIpAddress: true

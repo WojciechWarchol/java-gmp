@@ -1,0 +1,40 @@
+spring:
+  kafka:
+    consumer:
+      group-id: order-id
+      auto-offset-reset: earliest
+    bootstrap-servers: kafka:9092
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57InnoDBDialect
+  datasource:
+    url: "jdbc:mysql://mysql:3306/palmetto"
+    username: kafkaUser
+    password: kafkaPass
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#  sql:
+#    init:
+#      mode: always
+
+server:
+  port: 8081
+
+tpd:
+  order-topic-name: order
+  notification-topic-name: notification
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
