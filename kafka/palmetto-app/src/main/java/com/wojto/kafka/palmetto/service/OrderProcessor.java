@@ -43,7 +43,8 @@ public class OrderProcessor {
     }
 
     @KafkaListener(topics = "order", clientIdPrefix = "json",
-            containerFactory = "kafkaListenerContainerFactory")
+            containerFactory = "kafkaListenerContainerFactory",
+            concurrency = "3")
     public void listenForOrderUpdates(ConsumerRecord<String, Order> cr, @Payload Order payload) {
         log.info("Palmetto app received Order with ID: " + payload.getOrderId() + ". Cooking Pizzas");
         log.debug("Received Order: " + payload.toString());

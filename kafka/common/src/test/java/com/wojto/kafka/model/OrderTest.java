@@ -22,8 +22,6 @@ class OrderTest {
                 Ingredient.BACON,
                 Ingredient.ONIONS
         );
-//        Pizza testPizza1 = new Pizza(1, new Order(), ingredientList1, PizzaSize.M);
-//        Pizza testPizza2 = new Pizza(2, new Order(), ingredientList2, PizzaSize.L);
         Pizza testPizza1 = new Pizza(1, ingredientList1, PizzaSize.M);
         Pizza testPizza2 = new Pizza(2, ingredientList2, PizzaSize.L);
         List<Pizza> orderContents = List.of(testPizza1, testPizza2);

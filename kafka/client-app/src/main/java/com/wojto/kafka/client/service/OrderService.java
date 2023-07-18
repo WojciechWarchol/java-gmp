@@ -60,7 +60,8 @@ public class OrderService {
     }
 
     @KafkaListener(topics = "notification", clientIdPrefix = "json",
-            containerFactory = "kafkaListenerContainerFactory")
+            containerFactory = "kafkaListenerContainerFactory",
+            concurrency = "3")
     public void listenForOrderUpdates(ConsumerRecord<String, Order> cr, @Payload Notification payload) {
         log.info("Client app received status Notification of Order with ID: " + payload.getOrderId());
         log.debug("Received Notification: " + payload.toString());

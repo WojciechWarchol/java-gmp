@@ -22,7 +22,6 @@ public class Order {
     private long orderId;
     @Column
     private long userId;
-//    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pizza> orderContents;
     @Column

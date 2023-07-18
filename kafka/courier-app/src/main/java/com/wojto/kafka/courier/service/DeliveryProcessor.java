@@ -39,7 +39,8 @@ public class DeliveryProcessor {
     }
 
     @KafkaListener(topics = "notification", clientIdPrefix = "json",
-            containerFactory = "kafkaListenerContainerFactory")
+            containerFactory = "kafkaListenerContainerFactory",
+            concurrency = "3")
     public void listenForOrderUpdates(ConsumerRecord<String, Notification> cr, @Payload Notification payload) {
         if (payload.getOrderStatus() != OrderStatus.IN_DELIVERY) return;
 
