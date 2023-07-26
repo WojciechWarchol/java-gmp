@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.couchbase.repository.config.EnableCouchbaseRepositories;
 
 @SpringBootApplication
-@EnableCouchbaseRepositories(basePackages = { "com.wojto.nosql.repo" })
 public class NosqlApplication {
 
 	public static void main(String[] args) {

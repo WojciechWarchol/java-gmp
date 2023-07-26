@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.wojto</groupId>
-	<artifactId>nosql</artifactId>
+	<artifactId>nosql-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>nosql</name>
 	<description>NoSQL training project using couchbase</description>
@@ -51,8 +51,16 @@
 						</exclude>
 					</excludes>
 				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
+		<finalName>${project.artifactId}</finalName>
 	</build>
 
 </project>
