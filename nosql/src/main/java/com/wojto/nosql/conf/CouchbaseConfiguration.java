@@ -11,7 +11,7 @@ public class CouchbaseConfiguration extends AbstractCouchbaseConfiguration {
     public static final String NODE_LIST = "couchbase";
     public static final String BUCKET_NAME = "users";
     public static final String BUCKET_USERNAME = "admin";
-    public static final String BUCKET_PASSWORD = "pass";
+    public static final String BUCKET_PASSWORD = "passss";
 
     @Override
     public String getConnectionString() {

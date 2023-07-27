@@ -4,7 +4,7 @@ spring:
     bucket:
       name: users
       user: admin
-      password: pass
+      password: passss
 #  mvc:
 #    pathmatch:
 #      matching-strategy: ant_path_matcher
