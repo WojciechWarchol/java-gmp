@@ -4,6 +4,8 @@ services:
   couchbase:
     container_name: couchbase
     image: couchbase
+    volumes:
+      - "~/couchbase:/opt/couchbase/var"
     environment:
       COUCHBASE_SERVER_VERSION: latest
       COUCHBASE_ADMINISTRATOR_USERNAME: admin

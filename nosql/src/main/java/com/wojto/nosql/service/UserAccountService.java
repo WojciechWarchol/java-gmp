@@ -5,6 +5,7 @@ import com.wojto.nosql.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,5 +25,9 @@ public class UserAccountService {
 
     public UserAccount createUserAccount(UserAccount userAccount) {
         return userRepository.save(userAccount);
+    }
+
+    public List<UserAccount> findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }

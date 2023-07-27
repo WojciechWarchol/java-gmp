@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1")
 public class UserAccountController {
@@ -30,5 +32,11 @@ public class UserAccountController {
     @ResponseStatus(HttpStatus.CREATED)
     public UserAccount createUserAccount(@RequestBody UserAccount userAccount) {
         return userAccountService.createUserAccount(userAccount);
+    }
+
+    @GetMapping("/users/email/{email}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<UserAccount> findUsers(@PathVariable("email") String email) {
+        return userAccountService.findByEmail(email);
     }
 }
