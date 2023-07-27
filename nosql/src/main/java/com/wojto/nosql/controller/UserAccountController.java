@@ -39,4 +39,10 @@ public class UserAccountController {
     public List<UserAccount> findUsers(@PathVariable("email") String email) {
         return userAccountService.findByEmail(email);
     }
+
+    @PutMapping("/users/{id}/{sport}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserAccount addSportToUser(@PathVariable("id") String id, @PathVariable("sport") String sportName) {
+        return userAccountService.addSportToUser(id, sportName);
+    }
 }

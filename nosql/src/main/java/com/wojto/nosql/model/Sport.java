@@ -9,32 +9,28 @@ import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.Field;
 import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
 
-import java.time.LocalDateTime;
+import java.util.UUID;
 
 import static org.springframework.data.couchbase.core.mapping.id.GenerationStrategy.UNIQUE;
 
 @Document
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
-public class UserAccount {
+@Getter
+@Setter
+public class Sport {
 
     @Id
     @GeneratedValue(strategy = UNIQUE)
     private String id;
 
     @Field
-    private String email;
-    @Field
-    private String fullName;
-    @Field
-    private LocalDateTime birthDate;
-    @Field
-    private Gender gender;
-    @Field
-    private Sport sport;
+    private String sportName;
 
-    enum Gender {
-        MALE, FEMALE, OTHER;
+    public static Sport of(String sportName) {
+        Sport sport = new Sport();
+        sport.setSportName(sportName);
+        sport.setId(UUID.randomUUID().toString());
+        return sport;
     }
 }

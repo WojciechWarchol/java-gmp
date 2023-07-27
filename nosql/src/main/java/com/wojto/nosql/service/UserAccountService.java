@@ -1,5 +1,6 @@
 package com.wojto.nosql.service;
 
+import com.wojto.nosql.model.Sport;
 import com.wojto.nosql.model.UserAccount;
 import com.wojto.nosql.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,14 @@ public class UserAccountService {
 
     public List<UserAccount> findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public UserAccount addSportToUser(String id, String sportName) {
+        return userRepository.findById(id)
+                .map(userAccount -> {
+                    userAccount.setSport(Sport.of(sportName));
+                    return userRepository.save(userAccount);
+                })
+                .orElseThrow(() -> new RuntimeException("User with ID " + id + " not found"));
     }
 }
