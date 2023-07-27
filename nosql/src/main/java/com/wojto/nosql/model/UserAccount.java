@@ -7,8 +7,11 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.Field;
+import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
 
 import java.time.LocalDateTime;
+
+import static org.springframework.data.couchbase.core.mapping.id.GenerationStrategy.UNIQUE;
 
 @Document
 @AllArgsConstructor
@@ -17,6 +20,7 @@ import java.time.LocalDateTime;
 public class UserAccount {
 
     @Id
+    @GeneratedValue(strategy = UNIQUE)
     private String id;
 
     @Field

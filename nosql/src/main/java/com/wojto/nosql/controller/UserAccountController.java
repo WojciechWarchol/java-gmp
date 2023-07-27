@@ -28,7 +28,7 @@ public class UserAccountController {
 
     @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserAccount createUserAccount(UserAccount userAccount) {
+    public UserAccount createUserAccount(@RequestBody UserAccount userAccount) {
         return userAccountService.createUserAccount(userAccount);
     }
 }
