@@ -1,0 +1,16 @@
+spring:
+  kafka:
+    consumer:
+      group-id: notification-id
+      auto-offset-reset: earliest
+    bootstrap-servers: kafka:9092
+#    datasource:
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+    server:
+      port: 8082
+
+tpd:
+  notification-topic-name: notification

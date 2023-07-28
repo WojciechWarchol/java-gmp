@@ -1,0 +1,12 @@
+spring:
+  couchbase:
+    bootstrap-hosts: localhost
+    bucket:
+      name: users
+      user: admin
+      password: passss
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher
+server:
+  port: 8081

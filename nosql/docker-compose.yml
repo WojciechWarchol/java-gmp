@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  couchbase:
+    container_name: couchbase
+    image: couchbase
+    volumes:
+      - "~/couchbase:/opt/couchbase/var"
+    environment:
+      COUCHBASE_SERVER_VERSION: latest
+      COUCHBASE_ADMINISTRATOR_USERNAME: admin
+      COUCHBASE_ADMINISTRATOR_PASSWORD: passss
+      COUCHBASE_BUCKET: users
+    deploy:
+      replicas: 1
+    ports:
+#      - "8091:8091"
+#      - "8092:8092"
+#      - "8093:8093"
+#      - "8094:8094"
+      - "8091-8096:8091-8096"
+#      - "11210:11210"
+      - "11210-11211:11210-11211"
+
+  client:
+    container_name: "nosql-client"
+    build: .
+    ports:
+      - "8081:8081"
+    links:
+      - couchbase
+    depends_on:
+      - couchbase
