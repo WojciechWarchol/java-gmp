@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserAccountService {
@@ -34,6 +33,10 @@ public class UserAccountService {
 
     public List<UserAccount> findBySport(String sport) {
         return userRepository.findBySport(sport);
+    }
+
+    public List<UserAccount> findByTextInUserAccount(String query) {
+        return userRepository.findByTextInUserAccount(query);
     }
 
     public UserAccount addSportToUser(String id, String sportName) {

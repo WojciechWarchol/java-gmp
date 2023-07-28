@@ -46,6 +46,12 @@ public class UserAccountController {
         return userAccountService.findBySport(sport);
     }
 
+    @GetMapping("/search/user")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<UserAccount> findUsersByQuery(@RequestParam("q") String query) {
+        return userAccountService.findByTextInUserAccount(query);
+    }
+
     @PutMapping("/users/{id}/{sport}")
     @ResponseStatus(HttpStatus.CREATED)
     public UserAccount addSportToUser(@PathVariable("id") String id, @PathVariable("sport") String sportName) {
