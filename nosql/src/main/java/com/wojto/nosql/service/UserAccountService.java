@@ -32,6 +32,10 @@ public class UserAccountService {
         return userRepository.findByEmail(email);
     }
 
+    public List<UserAccount> findBySport(String sport) {
+        return userRepository.findBySport(sport);
+    }
+
     public UserAccount addSportToUser(String id, String sportName) {
         return userRepository.findById(id)
                 .map(userAccount -> {
