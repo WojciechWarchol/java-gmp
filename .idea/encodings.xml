@@ -1,7 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task2-Sorting/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task2-Sorting/src/main/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task2-Sorting/src/main/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task2-Sorting/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task3-file-scanner/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task3-file-scanner/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task4-open-salary/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task4-open-salary/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task5-producer-consumer-blocking-queue/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task5-producer-consumer-blocking-queue/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task5-producer-consumer-semaphore/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task5-producer-consumer-semaphore/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task6-recursive-action/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task6-recursive-action/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task6-recursive-task/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task6-recursive-task/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task6-recursive-task/task6-recursive-action/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task6-recursive-task/task6-recursive-action/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task6-recursive-task/task6-resursive-action/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task6-recursive-task/task6-resursive-action/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task7-fork-blur/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/advanced-multithreading/task7-fork-blur/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/effective-java/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/effective-java/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/business-services/common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/business-services/common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/business-services/one/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/business-services/one/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/business-services/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/business-services/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/business-services/two-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/business-services/two-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/business-services/two/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/business-services/two/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/platform-services/apigateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/platform-services/apigateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/platform-services/discovery/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/platform-services/discovery/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/platform-services/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/platform-services/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservices/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/task-5-producer-consumer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/task-5-producer-consumer/src/main/resources" charset="UTF-8" />
   </component>
 </project>

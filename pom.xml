@@ -6,11 +6,24 @@
 
     <groupId>com.wojto</groupId>
     <artifactId>java-gmp</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>advanced-multithreading/task2-Sorting</module>
+        <module>advanced-multithreading/task3-file-scanner</module>
+        <module>advanced-multithreading/task4-open-salary</module>
+        <module>advanced-multithreading/task5-producer-consumer-semaphore</module>
+        <module>advanced-multithreading/task5-producer-consumer-blocking-queue</module>
+        <module>advanced-multithreading/task6-recursive-task</module>
+        <module>advanced-multithreading/task6-recursive-action</module>
+        <module>advanced-multithreading/task7-fork-blur</module>
+        <module>microservices</module>
+        <module>effective-java</module>
+    </modules>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+<!--        <maven.compiler.source>17</maven.compiler.source>-->
+<!--        <maven.compiler.target>17</maven.compiler.target>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
