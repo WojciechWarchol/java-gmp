@@ -12,7 +12,7 @@ public interface UserRepository extends CrudRepository<UserAccount, String> {
 
     @Query("#{#n1ql.selectEntity} WHERE #{#n1ql.filter} AND sport.sportName = $1")
     List<UserAccount> findBySport(String sport);
-    
+
     @Query("#{#n1ql.selectEntity} WHERE #{#n1ql.filter} AND SEARCH(users, $1)")
     List<UserAccount> findByTextInUserAccount(String searchText);
 }

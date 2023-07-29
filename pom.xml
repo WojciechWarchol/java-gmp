@@ -18,6 +18,7 @@
         <module>advanced-multithreading/task6-recursive-action</module>
         <module>advanced-multithreading/task7-fork-blur</module>
         <module>microservices</module>
+        <module>effective-java</module>
     </modules>
 
     <properties>
